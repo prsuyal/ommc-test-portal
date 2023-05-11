@@ -21,7 +21,6 @@ import {
   CheckIcon,
   XIcon,
   UsersIcon,
-  SpeakerphoneIcon,
   ViewGridIcon,
 } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
@@ -392,11 +391,6 @@ const Test = () => {
             Test!
           </h1>
           <div className="mb-6 max-w-4xl rounded-xl text-xs lg:text-sm xl:text-base ">
-            <h2 className="mb-6 flex items-center font-bold uppercase italic text-red-600">
-              <SpeakerphoneIcon className="mr-2 h-6 w-6" />
-              DISCLAIMER: This is not the OMMC Year 3 Test. This is a mock test
-              with sample problems.
-            </h2>
             <h2 className="mb-4 flex flex-row items-center text-xl font-bold">
               <InformationCircleIcon className="mr-2 h-6 w-6" /> A Few Things to
               Keep in Mind:

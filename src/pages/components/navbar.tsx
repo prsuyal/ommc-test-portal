@@ -79,7 +79,7 @@ const Navbar = () => {
           </Link>
           <h1 className="relative hidden select-none text-2xl font-extrabold tracking-tight duration-75 dark:text-white sm:inline lg:text-4xl 2xl:text-[2.5rem]">
             <span className="duration-150 dark:text-red-600 ">
-              OMMC Test Portal
+              OMMC 2023 Test Portal
             </span>
           </h1>
         </div>

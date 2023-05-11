@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -11,18 +12,6 @@ import Image from "next/image";
 import { ArrowSmRightIcon, EyeOffIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import Head from "next/head";
-
-// type SubmissionData = {
-//   teamMember: string;
-//   teamName: string;
-//   started: string;
-//   q1: string;
-//   q2: string;
-//   q3: string;
-//   username: string;
-//   email: string;
-//   image: string;
-// };
 
 const SubmissionsTable = () => {
   const { data: session } = useSession();
@@ -83,21 +72,18 @@ const SubmissionsTable = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
                       Team Name
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                      Started
-                    </th>
+
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
                       Total Correct
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
-                      Question 1
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
-                      Question 2
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
-                      Question 3
-                    </th>
+                    {Array.from({ length: 25 }, (_, i) => i + 1).map((q) => (
+                      <th
+                        key={"question" + q.toString()}
+                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider "
+                      >
+                        Question {q}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200  dark:divide-gray-700 ">
@@ -123,22 +109,39 @@ const SubmissionsTable = () => {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
                         {JSON.parse(user[1][0]?.teamMembers).map((members) => (
-                          <div key={members}>
-                            <p
-                              className="my-1 rounded-xl bg-gray-300 px-2 py-1 dark:bg-gray-500"
-                              key={members}
-                            >
-                              {members}
-                            </p>
+                          <div key={members.name}>
+                            <div className="my-1 rounded-xl bg-gray-300 px-2 py-1 dark:bg-gray-500">
+                              <p>
+                                <span className="font-semibold">Name:</span>{" "}
+                                {members.name}
+                              </p>
+                              <p>
+                                {" "}
+                                <span className="font-semibold">Age:</span>{" "}
+                                {members.age}
+                              </p>
+                              <p>
+                                {" "}
+                                <span className="font-semibold">
+                                  Grade:
+                                </span>{" "}
+                                {members.grade}
+                              </p>
+                              <p>
+                                {" "}
+                                <span className="font-semibold">
+                                  School:
+                                </span>{" "}
+                                {members.school}
+                              </p>
+                            </div>
                           </div>
                         ))}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
                         {user[1][0].teamName}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {user[1][0].started}
-                      </td>
+
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
                         {totalCorrect(
                           user[1][0].q1,
@@ -146,15 +149,19 @@ const SubmissionsTable = () => {
                           user[1][0].q3
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {user[1][0].q1.replace('"', "").replace('"', "")}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {user[1][0].q2.replace('"', "").replace('"', "")}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {user[1][0].q3.replace('"', "").replace('"', "")}
-                      </td>
+                      {Array.from({ length: 25 }, (_, i) => i + 1).map((q) => (
+                        <td
+                          key={
+                            user[1][0].teamName.toString() +
+                            user[1][0][`q${q}`].toString()
+                          }
+                          className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100"
+                        >
+                          {user[1][0][`q${q}`]
+                            .replace('"', "")
+                            .replace('"', "")}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>

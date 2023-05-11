@@ -494,7 +494,7 @@ const Test = () => {
                         placeholder="Age"
                         value={age}
                         onChange={(event) => setAge(event.target.value)}
-                        max={100}
+                        max={18}
                         min={0}
                         onKeyPress={(event) => {
                           if (event.target.value.length >= 2) {
@@ -512,7 +512,10 @@ const Test = () => {
                         max={12}
                         min={0}
                         onKeyPress={(event) => {
-                          if (event.target.value.length >= 2) {
+                          if (
+                            event.target.value.length >= 2 ||
+                            event.target.value > 12
+                          ) {
                             event.preventDefault();
                           }
                         }}

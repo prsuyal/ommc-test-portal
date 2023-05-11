@@ -74,14 +74,14 @@ const SubmissionsTable = () => {
                     </th>
 
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
-                      Total Correct
+                      # Correct
                     </th>
                     {Array.from({ length: 25 }, (_, i) => i + 1).map((q) => (
                       <th
                         key={"question" + q.toString()}
                         className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider "
                       >
-                        Question {q}
+                        Q{q}
                       </th>
                     ))}
                   </tr>

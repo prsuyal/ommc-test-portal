@@ -323,7 +323,7 @@ const Test = () => {
           onClick={() => setShowModal(true)}
           className="mr-1 mb-1 flex flex-row items-center justify-center rounded-xl bg-red-600 px-6 py-3 text-sm font-bold uppercase text-white shadow-md outline-none transition-all duration-150 ease-linear hover:bg-red-700 hover:shadow-lg focus:outline-none active:bg-red-600"
         >
-          <UploadIcon className="mr-2 h-5 w-5" /> Submit
+          <UploadIcon className="mr-2 h-5 w-5" /> SUBMIT
         </button>
       );
     } else {

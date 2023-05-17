@@ -28,18 +28,114 @@ const SubmissionsTable = () => {
     void fetchSubmissions();
   }, []);
 
-  const totalCorrect = (q1, q2, q3) => {
+  const totalCorrect = (
+    q1,
+    q2,
+    q3,
+    q4,
+    q5,
+    q6,
+    q7,
+    q8,
+    q9,
+    q10,
+    q11,
+    q12,
+    q13,
+    q14,
+    q15,
+    q16,
+    q17,
+    q18,
+    q19,
+    q20,
+    q21,
+    q22,
+    q23,
+    q24,
+    q25
+  ) => {
     let totalCorrect = 0;
 
-    if (q1 === '"23"') {
+    if (q1 === '"18"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q2 === '"27"') {
+    if (q2 === '"25"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q3 === '"29"') {
+    if (q3 === '"89"') {
+      totalCorrect = totalCorrect + 1;
+    }
+
+    if (q4 === '"150"') {
+      totalCorrect = totalCorrect + 1;
+    }
+
+    if (q5 === '"10"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q6 === '"14739"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q7 === '"16/3"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q8 === '"11/12"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q9 === '"130"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q10 === '"43"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q11 === '"153"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q12 === '"127"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q13 === '"130"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q14 === '"10000"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q15 === '"6"') {
+      totalCorrect = totalCorrect + 1;
+    }
+
+    if (q16 === '"27/32"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q17 === '"21"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q18 === '"94"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q19 === '"7/2"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q20 === '"3/10"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q21 === '"127"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q22 === '"30"') {
+      totalCorrect = totalCorrect + 1;
+    }
+
+    if (q23 === '"8102"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q24 === '"111/5"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q25 === '"245"') {
       totalCorrect = totalCorrect + 1;
     }
 
@@ -146,8 +242,31 @@ const SubmissionsTable = () => {
                         {totalCorrect(
                           user[1][0].q1,
                           user[1][0].q2,
-                          user[1][0].q3
+                          user[1][0].q3,
+                          user[1][0].q4,
+                          user[1][0].q5,
+                          user[1][0].q6,
+                          user[1][0].q7,
+                          user[1][0].q8,
+                          user[1][0].q9,
+                          user[1][0].q10,
+                          user[1][0].q11,
+                          user[1][0].q12,
+                          user[1][0].q13,
+                          user[1][0].q14,
+                          user[1][0].q15,
+                          user[1][0].q16,
+                          user[1][0].q17,
+                          user[1][0].q18,
+                          user[1][0].q19,
+                          user[1][0].q20,
+                          user[1][0].q21,
+                          user[1][0].q22,
+                          user[1][0].q23,
+                          user[1][0].q24,
+                          user[1][0].q25
                         )}
+                        /25
                       </td>
                       {Array.from({ length: 25 }, (_, i) => i + 1).map((q) => (
                         <td

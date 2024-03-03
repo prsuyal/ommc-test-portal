@@ -316,7 +316,7 @@ const SubmissionsTable = () => {
                 </div>
                 <div className="relative mt-12 md:mt-0">
                   <Image
-                    src="./images/error.webp"
+                    src="/images/error.webp"
                     className="relative z-10 mx-auto w-72 select-none object-contain md:w-96"
                     alt="404"
                     height={400}

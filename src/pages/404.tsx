@@ -8,7 +8,6 @@ import Head from "next/head";
 export default function Error() {
   return (
     <>
-      {" "}
       <Head>
         <title>Error 404</title>
       </Head>

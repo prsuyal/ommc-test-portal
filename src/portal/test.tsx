@@ -386,34 +386,38 @@ const Test = () => {
           <h1 className="mb-6 text-xl font-bold md:text-2xl lg:mb-8 lg:text-3xl xl:text-4xl 2xl:text-[2.8rem]">
             Welcome to the{" "}
             <span className="rounded-xl bg-red-600 px-2 py-0.5 text-white xl:rounded-2xl xl:px-3">
-              OMMC Year 3
+              OMMC Year 4
             </span>{" "}
             Test!
           </h1>
           <div className="mb-6 max-w-4xl rounded-xl text-xs lg:text-sm xl:text-base ">
-            <h2 className="mb-4 flex flex-row items-center text-xl font-bold">
-              <InformationCircleIcon className="mr-2 h-6 w-6" /> A Few Things to
-              Keep in Mind:
-            </h2>
-            <ul className="mb-4 list-inside list-disc">
-              <li>Please ensure that you have a stable internet connection.</li>
-              <li>
-                The test is not timed, so do not worry about having enough time
-                to complete it.
-              </li>
-              <li>
-                Discussion on forums such as AoPS or the discord server is
-                strictly prohibited.
-              </li>
-              <li>
-                You may only collaborate with other members of your team. The
-                maximum team size is 4.
-              </li>
-              <li>
-                If you experience any technical issues, please contact the
-                competition organizers immediately.
-              </li>
-            </ul>
+            <div className="mb-4 rounded-lg border border-gray-400 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
+              <h2 className="mb-1 flex flex-row items-center text-xl font-bold">
+                <InformationCircleIcon className="mr-2 h-6 w-6" /> A Few Things
+                to Keep in Mind:
+              </h2>
+              <ul className="list-inside list-disc pl-2">
+                <li>
+                  Please ensure that you have a stable internet connection.
+                </li>
+                <li>
+                  The test is not timed, so do not worry about having enough
+                  time to complete it.
+                </li>
+                <li>
+                  Discussion on forums such as AoPS or the discord server is
+                  strictly prohibited.
+                </li>
+                <li>
+                  You may only collaborate with other members of your team. The
+                  maximum team size is 4.
+                </li>
+                <li>
+                  If you experience any technical issues, please contact the
+                  competition organizers immediately.
+                </li>
+              </ul>
+            </div>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label

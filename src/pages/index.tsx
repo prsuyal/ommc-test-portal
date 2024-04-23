@@ -39,16 +39,20 @@ const Home: NextPage = () => {
           <h5 className="z-10 text-center text-3xl  font-extrabold sm:text-4xl md:text-5xl lg:mb-8 lg:text-6xl xl:text-7xl">
             Welcome to{" "}
             <span className="block rounded-3xl bg-red-600 px-3 py-1 text-white dark:bg-red-700 sm:inline">
-              OMMC Year 3
+              OMMC Year 4
             </span>
           </h5>
           <Link
             href="https://www.ommcofficial.org/"
             className="relative z-10 text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
           >
-            OMMC 2023 has concluded! Stay tuned for new updates.
+            <span className="mr-2 block rounded-3xl bg-yellow-500 px-3 py-1 text-gray-900 sm:inline">
+              COMING SOON!
+            </span>{" "}
+            Stay tuned for new updates.
           </Link>
         </div>
+        {/* <TestPortal /> */}
       </main>
     </>
   );

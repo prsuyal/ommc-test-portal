@@ -418,7 +418,7 @@ const Test = () => {
                 </li>
               </ul>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="pb-4">
               <div className="mb-4">
                 <label
                   className="mb-2 block font-semibold text-gray-700 dark:text-white lg:text-lg"
@@ -464,9 +464,21 @@ const Test = () => {
                       key={index}
                       className="flex items-center justify-between"
                     >
-                      <span className="flex flex-row items-center">
-                        <UserIcon className="mr-2 h-5 w-5" /> Member {index + 1}
-                        : {member.name}
+                      <span className="flex flex-row items-center gap-2">
+                        <UserIcon className="mr-2 h-5 w-5" />{" "}
+                        <span className="font-semibold">
+                          Member {index + 1}:
+                        </span>
+                        {member.name}{" "}
+                        <span className="rounded-lg bg-green-200 px-2 py-1 text-xs text-green-700 xl:text-sm">
+                          Age {member.age}
+                        </span>
+                        <span className="rounded-lg bg-yellow-200 px-2 py-1 text-xs text-yellow-700 xl:text-sm">
+                          Grade {member.grade}
+                        </span>
+                        <span className="rounded-lg bg-blue-200 px-2 py-1 text-xs text-blue-700 xl:text-sm">
+                          {member.school}
+                        </span>
                       </span>
 
                       <button

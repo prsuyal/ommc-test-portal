@@ -13,15 +13,58 @@ import { ArrowSmRightIcon, EyeOffIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import Head from "next/head";
 
+interface TeamMember {
+  name: string;
+  age: string;
+  grade: string;
+  school: string;
+}
+
+interface Team {
+  teamName: string;
+  teamMembers: string; // This will be parsed into an array of TeamMember
+  q11: string;
+  q10: string;
+  q13: string;
+  q12: string;
+  q15: string;
+  q14: string;
+  q17: string;
+  q16: string;
+  q19: string;
+  q18: string;
+  email: string;
+  q1: string;
+  image: string;
+  q2: string;
+  q3: string;
+  q4: string;
+  q5: string;
+  q6: string;
+  q7: string;
+  q8: string;
+  q9: string;
+  started: string;
+  q20: string;
+  q22: string;
+  q21: string;
+  q24: string;
+  q23: string;
+  q25: string;
+  username: string;
+}
+
+type TeamsData = Record<string, Team[]>;
+
 const SubmissionsTable = () => {
   const { data: session } = useSession();
 
-  const [submissions, setSubmissions] = useState({});
+  const [submissions, setSubmissions] = useState<TeamsData>({});
 
   useEffect(() => {
     const fetchSubmissions = async () => {
       const res = await fetch("/api/submissions");
-      const data = await res.json();
+      const data: TeamsData = await res.json();
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       setSubmissions(data);
     };
@@ -57,90 +100,104 @@ const SubmissionsTable = () => {
   ) => {
     let totalCorrect = 0;
 
-    if (q1 === '"18"') {
+    if (q1 === '"31"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q2 === '"25"') {
+    if (q2 === '"14"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q3 === '"89"') {
+    if (q3 === '"1/2"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q4 === '"150"') {
+    if (q4 === '"1152"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q5 === '"10"') {
+    if (q5 === '"2940"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q6 === '"14739"') {
+    if (q6 === '"39"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q7 === '"16/3"') {
+    if (q7 === '"3"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q8 === '"11/12"') {
+    if (q8 === '"44"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q9 === '"130"') {
+    if (q9 === '"14"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q10 === '"43"') {
+    if (q10 === '"1011"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q11 === '"153"') {
+    if (q11 === '"339"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q12 === '"127"') {
+    if (q12 === '"3/7"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q13 === '"130"') {
+    if (q13 === '"18/19"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q14 === '"10000"') {
+    if (q14 === '"513"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q15 === '"6"') {
-      totalCorrect = totalCorrect + 1;
-    }
-
-    if (q16 === '"27/32"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q17 === '"21"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q18 === '"94"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q19 === '"7/2"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q20 === '"3/10"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q21 === '"127"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q22 === '"30"') {
+    if (q15 === '"272"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q23 === '"8102"') {
+    if (q16 === '"8"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q24 === '"111/5"') {
+    if (q17 === '"5426509"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q25 === '"245"') {
+    if (q18 === '"42"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q19 === '"30"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q20 === '"129"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q21 === '"49/25"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q22 === '"8"') {
+      totalCorrect = totalCorrect + 1;
+    }
+
+    if (q23 === '"2111"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q24 === '"5977/48"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q25 === '"34"') {
       totalCorrect = totalCorrect + 1;
     }
 
     return `Total correct: ${totalCorrect}`;
   };
+
+  // Get the number of teams
+  const numTeams = Object.keys(submissions).length;
+
+  // Calculate the total number of team members
+  const totalTeamMembers = Object.values(submissions).reduce((total, teams) => {
+    return (
+      total +
+      teams.reduce((teamTotal, team) => {
+        const members: TeamMember[] = JSON.parse(team.teamMembers);
+        return teamTotal + members.length;
+      }, 0)
+    );
+  }, 0);
 
   return (
     <>
@@ -155,7 +212,18 @@ const SubmissionsTable = () => {
             <Navbar />
             <div className="z-2 pattern-cross absolute h-[calc(100vh-3.7rem)] w-full duration-150 pattern-bg-gray-300 pattern-gray-500 pattern-opacity-20 pattern-size-8 dark:pattern-gray-700 dark:pattern-bg-gray-900"></div>
 
-            <div className="scrollbar relative z-10 h-[calc(100vh-3.7rem)] overflow-scroll  p-4">
+            <div className="scrollbar relative z-10 h-[calc(100vh-3.7rem)] overflow-scroll p-4">
+              <div className="mb-4 w-full border-collapse overflow-hidden rounded-2xl border border-gray-300 bg-gray-200 p-4 dark:divide-gray-800 dark:border-gray-600 dark:bg-gray-800">
+                <h1 className="text-lg font-semibold">STATS</h1>
+                <div className="flex gap-2 ">
+                  <div className="my-1 rounded-xl bg-gray-300 px-2 py-1 dark:bg-gray-500">
+                    Total Number of Teams: {numTeams}
+                  </div>
+                  <div className="my-1 rounded-xl bg-gray-300 px-2 py-1 dark:bg-gray-500">
+                    Total Number of Team Members: {totalTeamMembers}
+                  </div>
+                </div>
+              </div>
               <table className="w-full border-collapse divide-y divide-gray-200 overflow-hidden rounded-2xl border border-gray-300 dark:divide-gray-800 dark:border-gray-600">
                 <thead className="bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-300">
                   <tr>

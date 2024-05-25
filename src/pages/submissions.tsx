@@ -62,8 +62,8 @@ type TeamsData = Record<string, Team[]>;
 
 const SubmissionsTable = () => {
   const { data: session } = useSession();
-
   const [submissions, setSubmissions] = useState<TeamsData>({});
+  const [emails, setEmails] = useState<string>("");
 
   useEffect(() => {
     const fetchSubmissions = async () => {
@@ -73,6 +73,13 @@ const SubmissionsTable = () => {
       setSubmissions(data);
     };
     void fetchSubmissions();
+
+    const fetchEmails = async () => {
+      const res = await fetch("/api/emails");
+      const data = await res.json();
+      setEmails(data.Test_Emails);
+    };
+    void fetchEmails();
   }, []);
 
   const totalCorrect = (
@@ -203,14 +210,12 @@ const SubmissionsTable = () => {
     );
   }, 0);
 
-  const getAllEmails = (submissions: TeamsData): string => {
-    const emails: string[] = [];
-    Object.values(submissions).forEach((teams) => {
-      teams.forEach((team) => {
-        emails.push(team.email);
-      });
-    });
-    return emails.join(", ");
+  const getNumberOfUserAccounts = (emails: string): number => {
+    return emails.split(/\s+/).length;
+  };
+
+  const getAllEmails = (emails: string): string => {
+    return emails.replace(/\s+/g, ", ");
   };
 
   return (
@@ -234,6 +239,9 @@ const SubmissionsTable = () => {
                   </h1>
                   <div className="mt-2 flex gap-2">
                     <div className="my-1 rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
+                      Total User Accounts: {getNumberOfUserAccounts(emails)}
+                    </div>
+                    <div className="my-1 rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
                       Total Number of Teams: {numTeams}
                     </div>
                     <div className="my-1 rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
@@ -243,7 +251,7 @@ const SubmissionsTable = () => {
                 </div>
                 <div className="overflow-hidden rounded-md bg-gray-300 shadow-inner dark:bg-gray-800">
                   <p className="scrollbar h-20 overflow-y-scroll p-3 text-sm">
-                    {getAllEmails(submissions)}
+                    {getAllEmails(emails)}
                   </p>
                 </div>
               </div>

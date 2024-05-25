@@ -65,7 +65,7 @@ export default async function handler(
     });
 
     // Assign the emails string to the key "whatever" in the userData object
-    userData["OMMC2023_Emails"] = emailsString.trim(); // Remove trailing space
+    userData["Test_Emails"] = emailsString.trim(); // Remove trailing space
 
     return res.status(200).json(userData); // return the userData object
   } catch (error) {

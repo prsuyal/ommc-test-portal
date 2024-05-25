@@ -197,18 +197,21 @@ const SubmissionsTable = () => {
   };
 
   // Get the number of teams
-  const numTeams = Object.keys(submissions).length;
+  const getTeams = Object.keys(submissions).length;
 
   // Calculate the total number of team members
-  const totalTeamMembers = Object.values(submissions).reduce((total, teams) => {
-    return (
-      total +
-      teams.reduce((teamTotal, team) => {
-        const members: TeamMember[] = JSON.parse(team.teamMembers);
-        return teamTotal + members.length;
-      }, 0)
-    );
-  }, 0);
+  const getTotalTeamMembers = Object.values(submissions).reduce(
+    (total, teams) => {
+      return (
+        total +
+        teams.reduce((teamTotal, team) => {
+          const members: TeamMember[] = JSON.parse(team.teamMembers);
+          return teamTotal + members.length;
+        }, 0)
+      );
+    },
+    0
+  );
 
   const getNumberOfUserAccounts = (emails: string): number => {
     return emails.split(/\s+/).length;
@@ -232,20 +235,20 @@ const SubmissionsTable = () => {
             <div className="z-2 pattern-cross absolute h-[calc(100vh-3.7rem)] w-full duration-150 pattern-bg-gray-300 pattern-gray-500 pattern-opacity-20 pattern-size-8 dark:pattern-gray-700 dark:pattern-bg-gray-900"></div>
 
             <div className="scrollbar relative z-10 h-[calc(100vh-3.7rem)] overflow-scroll p-4">
-              <div className="mb-4 grid w-full border-collapse grid-cols-2 overflow-hidden rounded-2xl bg-gray-200 p-4 dark:divide-gray-800 dark:bg-gray-700">
+              <div className="mb-4 grid w-full border-collapse gap-2 overflow-hidden rounded-2xl bg-gray-200 p-4 dark:divide-gray-800 dark:bg-gray-700 md:grid-cols-2 md:gap-4">
                 <div>
                   <h1 className="flex items-center gap-1 text-lg font-semibold">
                     <ChartSquareBarIcon className="h-8 w-8" /> TEST STATISTICS
                   </h1>
                   <div className="mt-2 flex gap-2">
-                    <div className="my-1 rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
+                    <div className="rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
                       Total User Accounts: {getNumberOfUserAccounts(emails)}
                     </div>
-                    <div className="my-1 rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
-                      Total Number of Teams: {numTeams}
+                    <div className="rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
+                      Total Number of Teams: {getTeams}
                     </div>
-                    <div className="my-1 rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
-                      Total Number of Team Members: {totalTeamMembers}
+                    <div className="rounded-md bg-gray-300 px-2 py-1 dark:bg-gray-800">
+                      Total Number of Team Members: {getTotalTeamMembers}
                     </div>
                   </div>
                 </div>

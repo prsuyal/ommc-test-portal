@@ -45,16 +45,16 @@ const Home: NextPage = () => {
           </h5>
           <Link
             href="https://www.ommcofficial.org/"
-            className="relative z-10 text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
+            className="relative z-10 px-8 py-4 text-center text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
           >
-            <span className="mr-2 block rounded-3xl bg-yellow-500 px-3 py-1 text-gray-900 sm:inline">
+            <span className="mr-2 mb-2 block rounded-3xl bg-yellow-500 px-3 py-1 text-gray-900 sm:inline">
               ATTENTION!
             </span>{" "}
             The first round of OMMC 2024 is over. Stay tuned for updates!
           </Link>
           {/* <Link
             href="https://www.ommcofficial.org/"
-            className="relative z-10 text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
+            className="relative z-10 text-center text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
           >
             <span className="mr-2 block rounded-3xl bg-yellow-500 px-3 py-1 text-gray-900 sm:inline">
               COMING SOON!

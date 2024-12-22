@@ -1,3 +1,7 @@
+//This file is an API route that fetches all the emails from
+//the Firestore database and returns them as a string.
+//This is for easily emailing all participants of the test.
+
 import type { NextApiRequest, NextApiResponse } from "next";
 import firestore from "../../firebase";
 

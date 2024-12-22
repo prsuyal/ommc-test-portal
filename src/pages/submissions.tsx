@@ -1,10 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Navbar from "./components/navbar";
@@ -13,6 +6,7 @@ import {
   ArrowSmRightIcon,
   EyeOffIcon,
   ChartSquareBarIcon,
+  UserCircleIcon,
 } from "@heroicons/react/solid";
 import Link from "next/link";
 import Head from "next/head";
@@ -69,7 +63,6 @@ const SubmissionsTable = () => {
     const fetchSubmissions = async () => {
       const res = await fetch("/api/submissions");
       const data: TeamsData = await res.json();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       setSubmissions(data);
     };
     void fetchSubmissions();
@@ -83,31 +76,31 @@ const SubmissionsTable = () => {
   }, []);
 
   const totalCorrect = (
-    q1,
-    q2,
-    q3,
-    q4,
-    q5,
-    q6,
-    q7,
-    q8,
-    q9,
-    q10,
-    q11,
-    q12,
-    q13,
-    q14,
-    q15,
-    q16,
-    q17,
-    q18,
-    q19,
-    q20,
-    q21,
-    q22,
-    q23,
-    q24,
-    q25
+    q1: string,
+    q2: string,
+    q3: string,
+    q4: string,
+    q5: string,
+    q6: string,
+    q7: string,
+    q8: string,
+    q9: string,
+    q10: string,
+    q11: string,
+    q12: string,
+    q13: string,
+    q14: string,
+    q15: string,
+    q16: string,
+    q17: string,
+    q18: string,
+    q19: string,
+    q20: string,
+    q21: string,
+    q22: string,
+    q23: string,
+    q24: string,
+    q25: string
   ) => {
     let totalCorrect = 0;
 
@@ -221,6 +214,50 @@ const SubmissionsTable = () => {
     return emails.replace(/\s+/g, ", ");
   };
 
+  const Error404 = () => {
+    return (
+      <>
+        <Head>
+          <title>Error 404</title>
+        </Head>
+        <div className="relative min-h-screen overflow-hidden bg-gradient-to-tr from-red-700 via-red-600 to-red-600 font-general dark:from-red-900 dark:via-red-700 dark:to-red-500">
+          <Navbar />
+          <div className="z-5 pattern-opacity-90 pattern-dots absolute h-[100vh] w-[100vw] duration-150 pattern-bg-gray-500 pattern-gray-700 pattern-size-6 dark:pattern-bg-gray-700 dark:pattern-gray-900"></div>
+
+          <header className="mx-auto max-w-7xl py-6 px-4 text-center sm:px-6 md:pt-24 md:text-left lg:px-8">
+            <div className="relative z-10 grid md:grid-cols-2 md:gap-8">
+              <div className="my-auto ">
+                <div className="pb-6 text-3xl font-bold text-white lg:text-4xl ">
+                  <EyeOffIcon className="mx-auto my-auto mb-4 h-12 w-12 rounded-2xl bg-gradient-to-tr  from-red-500 via-red-600 to-red-600 p-2 text-white drop-shadow-lg dark:from-red-500 dark:to-red-600 md:mx-0"></EyeOffIcon>
+                  {"This page doesn't exist!"}
+                </div>
+                <div className="pb-4 text-lg font-semibold text-gray-100 md:max-w-xl  lg:pb-8 lg:text-2xl">
+                  Sorry about that! Please return to the portal.
+                </div>
+                <Link href="/" className=" md:mr-4 ">
+                  <button className="mx-auto flex transform select-none rounded-xl border border-transparent bg-red-600 py-3 px-4  text-base font-semibold text-white drop-shadow-lg duration-150 ease-in-out hover:scale-105 hover:bg-red-700 hover:text-gray-100 dark:bg-red-600 dark:text-gray-100 dark:hover:bg-red-700 dark:hover:text-red-400 md:mx-0 md:text-lg dark:lg:bg-red-600">
+                    Back to home{" "}
+                    <ArrowSmRightIcon className="my-auto ml-2 h-5 w-5"></ArrowSmRightIcon>
+                  </button>
+                </Link>
+              </div>
+              <div className="relative mt-12 md:mt-0">
+                <Image
+                  src="/images/error.webp"
+                  className="relative z-10 mx-auto w-72 select-none object-contain md:w-96"
+                  alt="404"
+                  height={400}
+                  width={400}
+                />
+                <div className="animate-blob1 absolute inset-0 left-0 right-0 top-0 bottom-0 transform-gpu rounded-full bg-red-400 opacity-[15%] blur-2xl dark:bg-red-500 "></div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       {session?.user.email === "23evanchang@gmail.com" ||
@@ -271,9 +308,11 @@ const SubmissionsTable = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
                       Team Name
                     </th>
-
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                      Started?
+                    </th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ">
-                      # Correct
+                      Total Correct
                     </th>
                     {Array.from({ length: 25 }, (_, i) => i + 1).map((q) => (
                       <th
@@ -286,151 +325,122 @@ const SubmissionsTable = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200  dark:divide-gray-700 ">
-                  {Object.entries<Record<string, Submission[]>>(
-                    submissions
-                  ).map((user) => (
-                    <tr
-                      key={user[1][0].username}
-                      className="odd:bg-gray-100 even:bg-gray-200 dark:odd:bg-[#2d394a] dark:even:bg-gray-800"
-                    >
-                      <td className="flex flex-row items-center gap-4 whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
-                        <Image
-                          alt="pfp"
-                          src={user[1][0].image}
-                          className="inline rounded-full"
-                          height={50}
-                          width={50}
-                        />
-                        <div className="flex flex-col">
-                          <div className="text-lg">{user[1][0].username}</div>
-                          <div>{user[1][0].email}</div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {JSON.parse(user[1][0]?.teamMembers).map((members) => (
-                          <div key={members.name}>
-                            <div className="my-1 rounded-xl bg-gray-300 px-2 py-1 dark:bg-gray-500">
-                              <p>
-                                <span className="font-semibold">Name:</span>{" "}
-                                {members.name}
-                              </p>
-                              <p>
-                                {" "}
-                                <span className="font-semibold">Age:</span>{" "}
-                                {members.age}
-                              </p>
-                              <p>
-                                {" "}
-                                <span className="font-semibold">
-                                  Grade:
-                                </span>{" "}
-                                {members.grade}
-                              </p>
-                              <p>
-                                {" "}
-                                <span className="font-semibold">
-                                  School:
-                                </span>{" "}
-                                {members.school}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {user[1][0].teamName}
-                      </td>
-
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
-                        {totalCorrect(
-                          user[1][0].q1,
-                          user[1][0].q2,
-                          user[1][0].q3,
-                          user[1][0].q4,
-                          user[1][0].q5,
-                          user[1][0].q6,
-                          user[1][0].q7,
-                          user[1][0].q8,
-                          user[1][0].q9,
-                          user[1][0].q10,
-                          user[1][0].q11,
-                          user[1][0].q12,
-                          user[1][0].q13,
-                          user[1][0].q14,
-                          user[1][0].q15,
-                          user[1][0].q16,
-                          user[1][0].q17,
-                          user[1][0].q18,
-                          user[1][0].q19,
-                          user[1][0].q20,
-                          user[1][0].q21,
-                          user[1][0].q22,
-                          user[1][0].q23,
-                          user[1][0].q24,
-                          user[1][0].q25
-                        )}
-                        /25
-                      </td>
-                      {Array.from({ length: 25 }, (_, i) => i + 1).map((q) => (
-                        <td
-                          key={
-                            user[1][0].teamName.toString() +
-                            user[1][0][`q${q}`].toString()
-                          }
-                          className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100"
+                  {Object.entries(submissions).map(([user, teams]) =>
+                    teams.map((team) => {
+                      const members: TeamMember[] = JSON.parse(
+                        team.teamMembers || "[]"
+                      );
+                      return (
+                        <tr
+                          key={team.username}
+                          className="odd:bg-gray-100 even:bg-gray-200 dark:odd:bg-[#2d394a] dark:even:bg-gray-800"
                         >
-                          {user[1][0][`q${q}`]
-                            .replace('"', "")
-                            .replace('"', "")}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
+                          <td className="flex flex-row items-center gap-4 whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                            {team.image ? (
+                              <Image
+                                alt="Profile picture"
+                                src={team.image}
+                                className="inline rounded-full"
+                                height={50}
+                                width={50}
+                              />
+                            ) : (
+                              <UserCircleIcon className="h-[50px] w-[50px]" />
+                            )}
+                            <div className="flex flex-col">
+                              <div className="text-lg">{team.username}</div>
+                              <div>{team.email}</div>
+                            </div>
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
+                            {members.map((member) => (
+                              <div
+                                key={member.name}
+                                className="my-1 rounded-xl bg-gray-300 px-2 py-1 dark:bg-gray-500"
+                              >
+                                <p>
+                                  <span className="font-semibold">Name:</span>{" "}
+                                  {member.name}
+                                </p>
+                                <p>
+                                  <span className="font-semibold">Age:</span>{" "}
+                                  {member.age}
+                                </p>
+                                <p>
+                                  <span className="font-semibold">Grade:</span>{" "}
+                                  {member.grade}
+                                </p>
+                                <p>
+                                  <span className="font-semibold">School:</span>{" "}
+                                  {member.school}
+                                </p>
+                              </div>
+                            ))}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
+                            {team.teamName}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
+                            {team.started ? "✓" : "✘"}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100">
+                            {totalCorrect(
+                              team.q1,
+                              team.q2,
+                              team.q3,
+                              team.q4,
+                              team.q5,
+                              team.q6,
+                              team.q7,
+                              team.q8,
+                              team.q9,
+                              team.q10,
+                              team.q11,
+                              team.q12,
+                              team.q13,
+                              team.q14,
+                              team.q15,
+                              team.q16,
+                              team.q17,
+                              team.q18,
+                              team.q19,
+                              team.q20,
+                              team.q21,
+                              team.q22,
+                              team.q23,
+                              team.q24,
+                              team.q25
+                            )}
+                            /25
+                          </td>
+                          {Array.from({ length: 25 }, (_, i) => i + 1).map(
+                            (q) => {
+                              const questionKey = `q${q}` as keyof Team; // Ensure the key exists on the Team type
+                              const questionValue = team[questionKey]; // Safely access the value
+
+                              return (
+                                <td
+                                  key={`${team.teamName}-${questionKey}`}
+                                  className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-100"
+                                >
+                                  {typeof questionValue === "string"
+                                    ? questionValue.replace(/"/g, "") // Remove quotes if it's a string
+                                    : ""}
+                                </td>
+                              );
+                            }
+                          )}
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
             </div>
           </main>
         </>
       ) : (
-        <>
-          <Head>
-            <title>Error 404</title>
-          </Head>
-          <div className="relative min-h-screen overflow-hidden bg-gradient-to-tr from-red-700 via-red-600 to-red-600 font-general dark:from-red-900 dark:via-red-700 dark:to-red-500">
-            <Navbar />
-            <div className="z-5 pattern-opacity-90 pattern-dots absolute h-[100vh] w-[100vw] duration-150 pattern-bg-gray-500 pattern-gray-700 pattern-size-6 dark:pattern-bg-gray-700 dark:pattern-gray-900"></div>
-
-            <header className="mx-auto max-w-7xl py-6 px-4 text-center sm:px-6 md:pt-24 md:text-left lg:px-8">
-              <div className="relative z-10 grid md:grid-cols-2 md:gap-8">
-                <div className="my-auto ">
-                  <div className="pb-6 text-3xl font-bold text-white lg:text-4xl ">
-                    <EyeOffIcon className="mx-auto my-auto mb-4 h-12 w-12 rounded-2xl bg-gradient-to-tr  from-red-500 via-red-600 to-red-600 p-2 text-white drop-shadow-lg dark:from-red-500 dark:to-red-600 md:mx-0"></EyeOffIcon>
-                    {"This page doesn't exist!"}
-                  </div>
-                  <div className="pb-4 text-lg font-semibold text-gray-100 md:max-w-xl  lg:pb-8 lg:text-2xl">
-                    Sorry about that! Please return to the portal.
-                  </div>
-                  <Link href="/" className=" md:mr-4 ">
-                    <button className="mx-auto flex transform select-none rounded-xl border border-transparent bg-red-600 py-3 px-4  text-base font-semibold text-white drop-shadow-lg duration-150 ease-in-out hover:scale-105 hover:bg-red-700 hover:text-gray-100 dark:bg-red-600 dark:text-gray-100 dark:hover:bg-red-700 dark:hover:text-red-400 md:mx-0 md:text-lg dark:lg:bg-red-600">
-                      Back to home{" "}
-                      <ArrowSmRightIcon className="my-auto ml-2 h-5 w-5"></ArrowSmRightIcon>
-                    </button>
-                  </Link>
-                </div>
-                <div className="relative mt-12 md:mt-0">
-                  <Image
-                    src="/images/error.webp"
-                    className="relative z-10 mx-auto w-72 select-none object-contain md:w-96"
-                    alt="404"
-                    height={400}
-                    width={400}
-                  />
-                  <div className="animate-blob1 absolute inset-0 left-0 right-0 top-0 bottom-0 transform-gpu rounded-full bg-red-400 opacity-[15%] blur-2xl dark:bg-red-500 "></div>
-                </div>
-              </div>
-            </header>
-          </div>
-        </>
+        <Error404 />
       )}
     </>
   );

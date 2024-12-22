@@ -4,7 +4,6 @@ import {
   ArrowRightIcon,
   DocumentDownloadIcon,
 } from "@heroicons/react/solid";
-// import { env } from "../../env.mjs";
 import { Document, Page, pdfjs } from "react-pdf";
 import Link from "next/link";
 

@@ -1,11 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { useState, useEffect } from "react";
 import {
   ArrowRightIcon,
@@ -24,20 +16,66 @@ import {
   ViewGridIcon,
 } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
+import Confetti from "react-confetti";
+
+import useLocalStorage from "~/utils/useLocalStorage";
 import Question from "./question";
 import Modal from "./modal";
-import Confetti from "react-confetti";
+
+// Define types for member data
+interface TeamMember {
+  name: string;
+  age: string;
+  grade: string;
+  school: string;
+}
+
+// Define types for submission data (use the correct structure from your API)
+interface Submission {
+  email: string;
+  teamName: string;
+  teamMembers: string;
+  q1: string;
+  q2: string;
+  q3: string;
+  q4: string;
+  q5: string;
+  q6: string;
+  q7: string;
+  q8: string;
+  q9: string;
+  q10: string;
+  q11: string;
+  q12: string;
+  q13: string;
+  q14: string;
+  q15: string;
+  q16: string;
+  q17: string;
+  q18: string;
+  q19: string;
+  q20: string;
+  q21: string;
+  q22: string;
+  q23: string;
+  q24: string;
+  q25: string;
+  started: string;
+}
 
 const Test = () => {
   const { data: session } = useSession();
   const [started, setStarted] = useLocalStorage("STARTED", false);
   const [teamName, setTeamName] = useLocalStorage("TEAM_NAME", "");
-  const [teamMembers, setTeamMembers] = useLocalStorage("TEAM_MEMBER", []);
-  const [newMember, setNewMember] = useState("");
-  const [age, setAge] = useState("");
-  const [grade, setGrade] = useState("");
-  const [school, setSchool] = useState("");
-  const [layout, setLayout] = useState(false);
+  const [teamMembers, setTeamMembers] = useLocalStorage<TeamMember[]>(
+    "TEAM_MEMBER",
+    []
+  );
+  const [newMember, setNewMember] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [grade, setGrade] = useState<string>("");
+  const [school, setSchool] = useState<string>("");
+  const [layout, setLayout] = useState<boolean>(false);
   const [q1, setQ1] = useLocalStorage("Q1", "");
   const [q2, setQ2] = useLocalStorage("Q2", "");
   const [q3, setQ3] = useLocalStorage("Q3", "");
@@ -64,9 +102,9 @@ const Test = () => {
   const [q24, setQ24] = useLocalStorage("Q24", "");
   const [q25, setQ25] = useLocalStorage("Q25", "");
 
-  const [showModal, setShowModal] = useState(false);
-  const [confetti, showConfetti] = useState(false);
-  const [current, setCurrent] = useState([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [confetti, showConfetti] = useState<boolean>(false);
+  const [current, setCurrent] = useState<Submission[]>([]);
 
   useEffect(() => {
     const fetchSubmissions = async () => {
@@ -78,39 +116,38 @@ const Test = () => {
   }, []);
 
   useEffect(() => {
-    if (current) {
-      Object.entries(current).forEach(([, submissions]) => {
-        if (submissions[0].email === session?.user?.email) {
-          setTeamMembers(JSON.parse(submissions[0].teamMembers));
-          setStarted(submissions[0].started === "true");
-          setTeamName(
-            submissions[0].teamName.replace('"', "").replace('"', "")
-          );
-          setQ1(submissions[0].q1.replace('"', "").replace('"', ""));
-          setQ2(submissions[0].q2.replace('"', "").replace('"', ""));
-          setQ3(submissions[0].q3.replace('"', "").replace('"', ""));
-          setQ4(submissions[0].q4.replace('"', "").replace('"', ""));
-          setQ5(submissions[0].q5.replace('"', "").replace('"', ""));
-          setQ6(submissions[0].q6.replace('"', "").replace('"', ""));
-          setQ7(submissions[0].q7.replace('"', "").replace('"', ""));
-          setQ8(submissions[0].q8.replace('"', "").replace('"', ""));
-          setQ9(submissions[0].q9.replace('"', "").replace('"', ""));
-          setQ10(submissions[0].q10.replace('"', "").replace('"', ""));
-          setQ11(submissions[0].q11.replace('"', "").replace('"', ""));
-          setQ12(submissions[0].q12.replace('"', "").replace('"', ""));
-          setQ13(submissions[0].q13.replace('"', "").replace('"', ""));
-          setQ14(submissions[0].q14.replace('"', "").replace('"', ""));
-          setQ15(submissions[0].q15.replace('"', "").replace('"', ""));
-          setQ16(submissions[0].q16.replace('"', "").replace('"', ""));
-          setQ17(submissions[0].q17.replace('"', "").replace('"', ""));
-          setQ18(submissions[0].q18.replace('"', "").replace('"', ""));
-          setQ19(submissions[0].q19.replace('"', "").replace('"', ""));
-          setQ20(submissions[0].q20.replace('"', "").replace('"', ""));
-          setQ21(submissions[0].q21.replace('"', "").replace('"', ""));
-          setQ22(submissions[0].q22.replace('"', "").replace('"', ""));
-          setQ23(submissions[0].q23.replace('"', "").replace('"', ""));
-          setQ24(submissions[0].q24.replace('"', "").replace('"', ""));
-          setQ25(submissions[0].q25.replace('"', "").replace('"', ""));
+    if (current.length > 0) {
+      current.forEach((submission) => {
+        if (submission.email === session?.user?.email) {
+          setTeamMembers(JSON.parse(submission.teamMembers));
+          setStarted(submission.started === "true");
+          setTeamName(submission.teamName.replace('"', "").replace('"', ""));
+
+          setQ1(submission.q1.replace('"', "").replace('"', ""));
+          setQ2(submission.q2.replace('"', "").replace('"', ""));
+          setQ3(submission.q3.replace('"', "").replace('"', ""));
+          setQ4(submission.q4.replace('"', "").replace('"', ""));
+          setQ5(submission.q5.replace('"', "").replace('"', ""));
+          setQ6(submission.q6.replace('"', "").replace('"', ""));
+          setQ7(submission.q7.replace('"', "").replace('"', ""));
+          setQ8(submission.q8.replace('"', "").replace('"', ""));
+          setQ9(submission.q9.replace('"', "").replace('"', ""));
+          setQ10(submission.q10.replace('"', "").replace('"', ""));
+          setQ11(submission.q11.replace('"', "").replace('"', ""));
+          setQ12(submission.q12.replace('"', "").replace('"', ""));
+          setQ13(submission.q13.replace('"', "").replace('"', ""));
+          setQ14(submission.q14.replace('"', "").replace('"', ""));
+          setQ15(submission.q15.replace('"', "").replace('"', ""));
+          setQ16(submission.q16.replace('"', "").replace('"', ""));
+          setQ17(submission.q17.replace('"', "").replace('"', ""));
+          setQ18(submission.q18.replace('"', "").replace('"', ""));
+          setQ19(submission.q19.replace('"', "").replace('"', ""));
+          setQ20(submission.q20.replace('"', "").replace('"', ""));
+          setQ21(submission.q21.replace('"', "").replace('"', ""));
+          setQ22(submission.q22.replace('"', "").replace('"', ""));
+          setQ23(submission.q23.replace('"', "").replace('"', ""));
+          setQ24(submission.q24.replace('"', "").replace('"', ""));
+          setQ25(submission.q25.replace('"', "").replace('"', ""));
         }
       });
     }
@@ -513,7 +550,8 @@ const Test = () => {
                         max={18}
                         min={0}
                         onKeyPress={(event) => {
-                          if (event.target.value.length >= 2) {
+                          const input = event.target as HTMLInputElement; // Cast to HTMLInputElement
+                          if (input.value.length >= 2) {
                             event.preventDefault();
                           }
                         }}
@@ -528,9 +566,10 @@ const Test = () => {
                         max={12}
                         min={0}
                         onKeyPress={(event) => {
+                          const input = event.target as HTMLInputElement; // Cast to HTMLInputElement
                           if (
-                            event.target.value.length >= 2 ||
-                            event.target.value > 12
+                            input.value.length >= 2 ||
+                            parseInt(input.value) > 12
                           ) {
                             event.preventDefault();
                           }
@@ -585,43 +624,3 @@ const Test = () => {
 };
 
 export default Test;
-// Hook
-function useLocalStorage<T>(key: string, initialValue: T) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined") {
-      return initialValue;
-    }
-    try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      // If error also return initialValue
-      console.log(error);
-      return initialValue;
-    }
-  });
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value: T | ((val: T) => T)) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      }
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
-  return [storedValue, setValue] as const;
-}

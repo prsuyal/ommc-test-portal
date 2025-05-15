@@ -39,19 +39,19 @@ const Home: NextPage = () => {
           <h5 className="z-10 text-center text-3xl  font-extrabold sm:text-4xl md:text-5xl lg:mb-8 lg:text-6xl xl:text-7xl">
             Welcome to{" "}
             <span className="block rounded-3xl bg-red-600 px-3 py-1 text-white dark:bg-red-700 sm:inline">
-              OMMC Year 4
+              OMMC Year 5
             </span>
           </h5>
-          <Link
+          {/* <Link
             href="https://www.ommcofficial.org/"
             className="relative z-10 px-8 py-4 text-center text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
           >
             <span className="mr-2 mb-2 block rounded-3xl bg-yellow-500 px-3 py-1 text-gray-900 sm:inline">
               ATTENTION!
             </span>{" "}
-            The first round of OMMC 2024 is over. Stay tuned for updates!
-          </Link>
-          {/* <Link
+            The first round of OMMC 2025 is over. Stay tuned for updates!
+          </Link> */}
+          <Link
             href="https://www.ommcofficial.org/"
             className="relative z-10 text-center text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline"
           >
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
               COMING SOON!
             </span>{" "}
             Stay tuned for new updates.
-          </Link> */}
+          </Link>
           {/* <button
               onClick={() => void signIn()}
               className="z-10 mt-8 flex select-none flex-row items-center rounded-2xl p-4 text-xl font-[600] duration-150 hover:scale-[1.02] hover:underline lg:text-3xl"

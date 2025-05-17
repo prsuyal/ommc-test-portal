@@ -100,85 +100,85 @@ const SubmissionsTable = () => {
   ) => {
     let totalCorrect = 0;
 
-    if (q1 === '"31"') {
+    if (q1 === '"4077"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q2 === '"14"') {
+    if (q2 === '"72"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q3 === '"1/2"') {
+    if (q3 === '"240"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q4 === '"1152"') {
+    if (q4 === '"47618"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q5 === '"2940"') {
+    if (q5 === '"16"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q6 === '"39"') {
+    if (q6 === '"4/9"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q7 === '"3"') {
+    if (q7 === '"1/8"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q8 === '"44"') {
+    if (q8 === '"42"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q9 === '"14"') {
+    if (q9 === '"242"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q10 === '"1011"') {
+    if (q10 === '"91"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q11 === '"339"') {
+    if (q11 === '"45"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q12 === '"3/7"') {
+    if (q12 === '"24/143"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q13 === '"18/19"') {
+    if (q13 === '"30"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q14 === '"513"') {
+    if (q14 === '"12"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q15 === '"272"') {
-      totalCorrect = totalCorrect + 1;
-    }
-
-    if (q16 === '"8"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q17 === '"5426509"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q18 === '"42"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q19 === '"30"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q20 === '"129"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q21 === '"49/25"') {
-      totalCorrect = totalCorrect + 1;
-    }
-    if (q22 === '"8"') {
+    if (q15 === '"33"') {
       totalCorrect = totalCorrect + 1;
     }
 
-    if (q23 === '"2111"') {
+    if (q16 === '"3780"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q24 === '"5977/48"') {
+    if (q17 === '"1/4"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q25 === '"34"') {
+    if (q18 === '"143469420"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q19 === '"688"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q20 === '"98"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q21 === '"143469420"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q22 === '"23/47"') {
+      totalCorrect = totalCorrect + 1;
+    }
+
+    if (q23 === '"49299"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q24 === '"143469420"') {
+      totalCorrect = totalCorrect + 1;
+    }
+    if (q25 === '"819"') {
       totalCorrect = totalCorrect + 1;
     }
 
@@ -214,7 +214,8 @@ const SubmissionsTable = () => {
     <>
       {session?.user.email === "23evanchang@gmail.com" ||
       session?.user.email === "kk23907751@gmail.com" ||
-      session?.user.email === "billchanghaofei@gmail.com" ? (
+      session?.user.email === "billchanghaofei@gmail.com" ||
+      session?.user.email === "suyalpranshu@gmail.com" ? (
         <>
           <Head>
             <title>User Submissions</title>

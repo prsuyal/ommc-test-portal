@@ -215,6 +215,8 @@ const SubmissionsTable = () => {
       {session?.user.email === "23evanchang@gmail.com" ||
       session?.user.email === "kk23907751@gmail.com" ||
       session?.user.email === "billchanghaofei@gmail.com" ||
+      session?.user.email === "charleszhang1729@gmail.com" ||
+      session?.user.email === "abwang07@gmail.com" ||
       session?.user.email === "suyalpranshu@gmail.com" ? (
         <>
           <Head>

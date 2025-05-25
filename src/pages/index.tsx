@@ -94,7 +94,7 @@ const Home: NextPage = () => {
               <span className="mr-2 block rounded-3xl bg-yellow-500 px-3 py-1 text-gray-900 sm:inline">
                 ATTENTION!
               </span>{" "}
-              The main round of OMMC 2024 is over. Stay tuned for the final
+              The main round of OMMC 2025 is over. Stay tuned for the final
               round.
             </Link>
           </div>

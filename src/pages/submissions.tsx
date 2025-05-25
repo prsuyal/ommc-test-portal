@@ -156,7 +156,7 @@ const SubmissionsTable = () => {
     if (q17 === '"1/4"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q18 === '"143469420"') {
+    if (q18 === '"363"') {
       totalCorrect = totalCorrect + 1;
     }
     if (q19 === '"688"') {
@@ -165,7 +165,7 @@ const SubmissionsTable = () => {
     if (q20 === '"98"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q21 === '"143469420"') {
+    if (q21 === '"223588"') {
       totalCorrect = totalCorrect + 1;
     }
     if (q22 === '"23/47"') {
@@ -175,7 +175,7 @@ const SubmissionsTable = () => {
     if (q23 === '"49299"') {
       totalCorrect = totalCorrect + 1;
     }
-    if (q24 === '"143469420"') {
+    if (q24 === '"3786602707"') {
       totalCorrect = totalCorrect + 1;
     }
     if (q25 === '"819"') {
